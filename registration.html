@@ -1,20 +1,26 @@
 <!doctype html>
-<html>
+<html lang="en-US">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration Form</title>
+    <link href="main.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
-<form action="registration.php" method="post">
-    <h1>Registration:</h1>
-    <input type="text" name="firstname" placeholder="First Name"><br>
-    <input type="text" name="lastname" placeholder="Last Name"><br>
-    Birthday:
-    <input type="date" name="birthday"><br><br>
-    <input type="text" name="email" placeholder="Email Address"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="submit" value="Register"><br>
-</form>
+    <div class="formContainer">
+        <div class="formBox">
+            <form action="registration.php" method="post">
+                <h1 class="formHeading">Sign up!</h1>
+                <input type="text" name="firstname" placeholder="First Name"><br>
+                <input type="text" name="lastname" placeholder="Last Name"><br>
+                <label>Birthday:</label><br>
+                <input type="date" name="birthday"><br><br>
+                <input type="text" name="email" placeholder="Email Address"><br>
+                <input type="password" name="password" placeholder="Password"><br>
+                <input type="submit" class="formButton" value="Register"><br>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

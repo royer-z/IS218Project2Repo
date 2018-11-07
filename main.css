@@ -1,0 +1,57 @@
+body{
+    background-color: #99873D;
+}
+
+input[type=text], input[type=password], input[type=date], textarea {
+    background-color: #FF9A00;
+    color: #FFFFFF;
+    width: 15em;
+    margin-bottom: .5em;
+    padding: .25em;
+    border: none;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    font-weight: bold;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #FFFFFF;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    font-weight: bold;
+}
+
+label {
+    color: #FFFFFF;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    font-weight: bold;
+}
+
+.formContainer {
+    text-align: center;
+}
+
+.formBox {
+    background-color: #40DEFF;
+    display: inline-block;
+    width: 20em;
+    margin-top: 5em;
+    border: 5px #FFFFFF;
+    border-style: double;
+}
+
+.formHeading {
+    color: #FFFFFF;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    font-size: 1.25em;
+    margin-top: 1em;
+}
+
+.formButton {
+    background-color: #99873D;
+    color: #FFFFFF;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    font-weight: bold;
+    margin: 5px;
+    margin-bottom: 10px;
+    border: none;
+    height: 2.5em;
+}

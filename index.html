@@ -1,16 +1,22 @@
 <!doctype html>
-<html>
+<html lang="en-US">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login Form</title>
+    <link href="main.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
-<form action="login.php" method="post">
-    <h1>Login:</h1>
-    <input type="text" name="email" placeholder="Email Address"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="submit" value="Log in"><br>
-</form>
+    <div class="formContainer">
+        <div class="formBox">
+            <form action="login.php" method="post">
+                <h1 class="formHeading">Welcome!</h1>
+                <input type="text" name="email" placeholder="Email"><br>
+                <input type="password" name="password" placeholder="Password"><br>
+                <input type="submit" class="formButton" value="Log in"><br>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
