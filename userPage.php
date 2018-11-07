@@ -5,7 +5,7 @@ $email = $_SESSION['email'];
 
 $dsn = "mysql:host=sql1.njit.edu;dbname=rvz2";
 $user = "rvz2";
-$pass = "OiyeITiq2";
+$pass = "";
 
 try {
     $db = new PDO($dsn, $user, $pass);
