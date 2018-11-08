@@ -1,28 +1,33 @@
 <?php
 session_start();
+
 $email = $_SESSION['email'];
 $questionName = $_POST['questionName'];
 $questionBody = $_POST['questionBody'];
 $questionSkills = $_POST['questionSkills'];
+
 if (checkQuestionName($questionName) && checkQuestionBody($questionBody) && checkQuestionSkills($questionSkills)) {
     $dsn = "mysql:host=sql1.njit.edu;dbname=rvz2";
     $user = "rvz2";
     $pass = "";
+
     try {
         $db = new PDO($dsn, $user, $pass);
     }catch(PDOException $e) {
         $error_message = $e->getMessage();
         echo "<p>An error occured while connecting to the database: $error_message </p>";
     }
+
     // Insert new question
-    $query = "INSERT INTO questions (owneremail, title, body, skills) VALUES (:email, :questionName, :questionBody, :questionSkills)"; // Change to INSERT statement
+    $query = "INSERT INTO questions (owneremail, title, body, skills) VALUES (:email, :questionName, :questionBody, :questionSkills)";
     $statement = $db->prepare($query);
-    $statement->bindValue(":email, $email");
+    $statement->bindValue(":email", $email);
     $statement->bindValue(":questionName", $questionName);
     $statement->bindValue(":questionBody", $questionBody);
     $statement->bindValue(":questionSkills", $questionSkills);
     $statement->execute();
     $statement->closeCursor();
+
     header("Location: userPage.php");
 }
 else {

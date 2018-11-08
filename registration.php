@@ -1,20 +1,24 @@
 <?php
 session_start();
+
 $firstName = $_POST['firstname'];
 $lastName = $_POST['lastname'];
 $birthday = $_POST['birthday'];
 $email = $_POST["email"];
 $password = $_POST["password"];
+
 if (checkFirstName($firstName) && checkLastName($lastName) && checkBirthday($birthday) && checkEmail($email) && checkPassword($password)) {
     $dsn = "mysql:host=sql1.njit.edu;dbname=rvz2";
     $user = "rvz2";
     $pass = "";
+
     try {
         $db = new PDO($dsn, $user, $pass);
     }catch(PDOException $e) {
         $error_message = $e->getMessage();
         echo "<p>An error occurred while connecting to the database: $error_message </p>";
     }
+
     // Register new user
     $query = "INSERT INTO accounts (email, fname, lname, birthday, password) VALUES (:email, :firstName, :lastName, :birthday, :password)"; // Change to INSERT statement
     $statement = $db->prepare($query);
@@ -25,12 +29,15 @@ if (checkFirstName($firstName) && checkLastName($lastName) && checkBirthday($bir
     $statement->bindValue(":password", $password);
     $statement->execute();
     $statement->closeCursor();
+
     $_SESSION['email'] = $email;
+
     header('Location: userPage.php');
 }
 else {
     echo "Please go back and retry.";
 }
+
 function checkFirstName($data) {
     if (empty($data)) {
         print "First name error: please enter your first name.<br>";
@@ -41,6 +48,7 @@ function checkFirstName($data) {
         return TRUE;
     }
 }
+
 function checkLastName($data) {
     if (empty($data)) {
         print "Last name error: please enter your last name.<br>";
@@ -51,6 +59,7 @@ function checkLastName($data) {
         return TRUE;
     }
 }
+
 function checkBirthday($data) {
     if (empty($data)) {
         print "Birthday error: please enter your birthday.<br>";
@@ -61,6 +70,7 @@ function checkBirthday($data) {
         return TRUE;
     }
 }
+
 function checkEmail($data) {
     $validEmail = TRUE;
     if (empty($data)) {
@@ -85,6 +95,7 @@ function checkEmail($data) {
         return FALSE;
     }
 }
+
 function checkPassword ($data) {
     $validPassword = TRUE;
     if (empty($data)) {

@@ -32,8 +32,8 @@ label {
 .formBox {
     background-color: #40DEFF;
     display: inline-block;
-    width: 20em;
     margin-top: 5em;
+    width: 25em;
     border: 5px #FFFFFF;
     border-style: double;
 }
@@ -54,4 +54,21 @@ label {
     margin-bottom: 10px;
     border: none;
     height: 2.5em;
+}
+
+.questionHeading {
+    color: #FFFFFF;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    margin: 0px;
+    font-size: 1em;
+    float: left;
+    margin-left: 1em;
+}
+
+.questionContent {
+    color: #000000;
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    margin: 0px;
+    font-size: 1em;
+    text-align: left;
 }

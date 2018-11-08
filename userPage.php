@@ -1,42 +1,51 @@
 <?php
 session_start();
+
 $email = $_SESSION['email'];
 $dsn = "mysql:host=sql1.njit.edu;dbname=rvz2";
 $user = "rvz2";
 $pass = "";
+
+echo "<!doctype html><html lang='en-US'>";
+echo "<head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Page</title>";
+echo "<link href='main.css' type='text/css' rel='stylesheet'></head>";
+echo "<body><div class='formContainer'><div class='formBox'>";
+
 try {
     $db = new PDO($dsn, $user, $pass);
 }catch(PDOException $e) {
     $error_message = $e->getMessage();
-    echo "<p>An error occurred while connecting to the database: $error_message </p>";
+    echo "<p>An error occurred while connecting to the database: $error_message</p>";
+    echo "<p>Please go back and retry.</p>";
 }
+
 // Query database for current user information
 $query = "SELECT fname, lname FROM accounts WHERE email = :email";
 $statement = $db->prepare($query);
-$statement->bindValue(":email", $email);
+$statement->bindValue(':email', $email);
 $statement->execute();
-$account = $statement->fetchAll();
+$account = $statement->fetch();
 $statement->closeCursor();
+
 // Display user's first and last name
-$firstN = $account['fname'];
-$lastN = $aacount['lname'];
-echo "<h1>Welcome $firstN $lastN!</h1><br><br>";
+echo "<h1 class='formHeading'>Welcome ".$account['fname']." ".$account['lname']."!</h1>";
+
 // Display all the questions for the current user
-$query = "SELECT title, body, skills, score FROM questions WHERE email = :email";
+$query = "SELECT title, body FROM questions WHERE owneremail = :email";
 $statement = $db->prepare($query);
-$statement->bindValue(":email", $email);
+$statement->bindValue(':email', $email);
 $statement->execute();
 $questions = $statement->fetchAll();
 $statement->closeCursor();
-$title = $questions['title'];
-$body = $questions['body'];
-$skills = $questions['skills'];
-$score = $questions['score'];
+
+$questionCounter = 1;
 foreach ($questions as $question) {
-    echo "<h3>Title: </h3><br><p>$title</p><br>";
-    echo "<h4>Body: </h4><br><p>$body</p><br>";
-    echo "<h5>Skills: </h5><br><p>$skills</p><br>";
-    echo "<h6>Score: </h6><br><p>$score</p><br><br>";
+    echo "<h2 class='questionHeading'>Question:&nbsp;</h2><p class='questionContent'>$questionCounter</p>";
+    echo "<h2 class='questionHeading'>Title:&nbsp;</h2><p class='questionContent'>".$question['title']."</p>";
+    echo "<h2 class='questionHeading'>Body:&nbsp;</h2><p class='questionContent'>".$question['body']."</p><br><br>";
+    $questionCounter++;
 }
+
 // Takes user to add new question form
-echo "<form action='questionForm.php' method='post'><input type='submit' value='New question'><br></form>";
+echo "<form action='questionForm.php' method='post'><input type='submit' class='formButton' value='New question'><br></form>";
+echo "</div></div></body></html>";
