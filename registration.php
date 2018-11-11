@@ -1,13 +1,24 @@
 <?php
 session_start();
 
+echo "<!doctype html><html lang='en-US'>";
+echo "<head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Validation</title>";
+echo "<link href='main.css' type='text/css' rel='stylesheet'></head>";
+echo "<body><div class='formContainer'><div class='formBox'>";
+
 $firstName = $_POST['firstname'];
 $lastName = $_POST['lastname'];
 $birthday = $_POST['birthday'];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-if (checkFirstName($firstName) && checkLastName($lastName) && checkBirthday($birthday) && checkEmail($email) && checkPassword($password)) {
+$goodFirst = checkFirstName($firstName);
+$goodLast = checkLastName($lastName);
+$goodBirthday = checkBirthday($birthday);
+$goodEmail = checkEmail($email);
+$goodPassword = checkPassword($password);
+
+if ($goodFirst && $goodLast && $goodBirthday && $goodEmail && $goodPassword) {
     $dsn = "mysql:host=sql1.njit.edu;dbname=rvz2";
     $user = "rvz2";
     $pass = "";
@@ -16,7 +27,7 @@ if (checkFirstName($firstName) && checkLastName($lastName) && checkBirthday($bir
         $db = new PDO($dsn, $user, $pass);
     }catch(PDOException $e) {
         $error_message = $e->getMessage();
-        echo "<p>An error occurred while connecting to the database: $error_message </p>";
+        echo "<p class='errorMessage'><span class='errorType'>Database error: </span><span class='errorDescription'>An error occurred while connecting to the database: $error_message</span></p>";
     }
 
     // Register new user
@@ -35,38 +46,35 @@ if (checkFirstName($firstName) && checkLastName($lastName) && checkBirthday($bir
     header('Location: userPage.php');
 }
 else {
-    echo "Please go back and retry.";
+    echo "<p class='errorMessage'>Please go back and retry.</p>";
 }
 
 function checkFirstName($data) {
     if (empty($data)) {
-        print "First name error: please enter your first name.<br>";
+        print "<p class='errorMessage'><span class='errorType'>First name error: </span><span class='errorDescription'>please enter your first name.</span></p><br>";
         return FALSE;
     }
     else {
-        print "Valid first name: ".$data."<br>";
         return TRUE;
     }
 }
 
 function checkLastName($data) {
     if (empty($data)) {
-        print "Last name error: please enter your last name.<br>";
+        print "<p class='errorMessage'><span class='errorType'>Last name error: </span><span class='errorDescription'>please enter your last name.</span></p><br>";
         return FALSE;
     }
     else {
-        print "Valid last name: ".$data."<br>";
         return TRUE;
     }
 }
 
 function checkBirthday($data) {
     if (empty($data)) {
-        print "Birthday error: please enter your birthday.<br>";
+        print "<p class='errorMessage'><span class='errorType'>Birthday error: </span><span class='errorDescription'>please enter your birthday.</span></p><br>";
         return FALSE;
     }
     else {
-        print "Valid birthday: ".$data."<br>";
         return TRUE;
     }
 }
@@ -74,48 +82,38 @@ function checkBirthday($data) {
 function checkEmail($data) {
     $validEmail = TRUE;
     if (empty($data)) {
-        print "Email error: please enter an email address.<br>";
+        print "<p  class='errorMessage'><span class='errorType'>Email error: </span><span class='errorDescription'>please enter an email address.</span></p><br>";
         $validEmail = FALSE;
     }
     if (strpos($data, '@') == FALSE) {
         if (strlen($data) == 0) {
-            print "Email error: please use '@' in your email address.<br>";
+            print "<p class='errorMessage'><span class='errorType'>Email error: </span><span class='errorDescription'>please use '@' in your email address.</span></p><br>";
             $validEmail = FALSE;
         }
         else {
-            print "Email error: please use '@' in your email address. Your entry: ".$data."<br>";
+            print "<p class='errorMessage'><span class='errorType'>Email error: </span><span>please use '@' in your email address. Your entry: ".$data."</span></p><br>";
             $validEmail = FALSE;
         }
     }
-    if ($validEmail == TRUE) {
-        print "Valid email: ".$data."<br>";
-        return TRUE;
-    }
-    else {
-        return FALSE;
-    }
+    return $validEmail;
 }
 
 function checkPassword ($data) {
     $validPassword = TRUE;
     if (empty($data)) {
-        print "Password error: please enter a password.<br>";
+        print "<p class='errorMessage'><span class='errorType'>Password error: </span><span class='errorDescription'>please enter a password.</span></p><br>";
         $validPassword = FALSE;
     }
     if (strlen($data) < 8) {
         if (strlen($data) == 0) {
-            print "Password error: please enter a password that is at least 8 characters long. Your entry is ".strlen($data)." characters long.<br>";
+            print "<p class='errorMessage'><span class='errorType'>Password error: </span><span class='errorDescription'>please enter a password that is at least 8 characters long. Your entry is ".strlen($data)." characters long.</span></p><br>";
         }
         else {
-            print "Password error: please enter a password that is at least 8 characters long. Your entry '".$data."' is ".strlen($data)." characters long.<br>";
+            print "<p class='errorMessage'><span class='errorType'>Password error: </span><span class='errorDescription'>please enter a password that is at least 8 characters long. Your entry '".$data."' is ".strlen($data)." character(s) long.</span></p><br>";
         }
         $validPassword = FALSE;
     }
-    if ($validPassword == TRUE) {
-        print "Valid password: ".$data."<br>";
-        return TRUE;
-    }
-    else {
-        return FALSE;
-    }
+    return $validPassword;
 }
+
+echo "</div></div></body></html>";

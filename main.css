@@ -11,6 +11,7 @@ input[type=text], input[type=password], input[type=date], textarea {
     border: none;
     font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 input::placeholder, textarea::placeholder {
@@ -23,6 +24,7 @@ label {
     color: #FFFFFF;
     font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 .formContainer {
@@ -33,15 +35,14 @@ label {
     background-color: #40DEFF;
     display: inline-block;
     margin-top: 5em;
-    width: 25em;
-    border: 5px #FFFFFF;
-    border-style: double;
+    width: 60em;
+    border: 5px double #FFFFFF;
 }
 
 .formHeading {
     color: #FFFFFF;
     font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
-    font-size: 1.25em;
+    font-size: 2em;
     margin-top: 1em;
 }
 
@@ -54,21 +55,45 @@ label {
     margin-bottom: 10px;
     border: none;
     height: 2.5em;
+    font-size: 1.5em;
 }
 
 .questionHeading {
-    color: #FFFFFF;
+    color: #cd6c00;
     font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
     margin: 0px;
-    font-size: 1em;
-    float: left;
+    font-size: 1.5em;
     margin-left: 1em;
+    float: left;
 }
 
 .questionContent {
-    color: #000000;
+    color: #505050;
     font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
     margin: 0px;
-    font-size: 1em;
+    font-size: 1.5em;
     text-align: left;
+}
+
+.errorMessage {
+    font-family: "Bookman Old Style", "Arial", "Times New Roman", sans-serif;
+    font-size: 1.5em;
+}
+
+.errorType {
+    color: red;
+}
+
+.errorDescription {
+    color: gray;
+}
+
+.whiteUnderline {
+    text-decoration: underline;
+    text-decoration-color: #FFFFFF;
+}
+
+#yourQuestions {
+    color: #cd6c00;
+    font-size: 1.75em;
 }
